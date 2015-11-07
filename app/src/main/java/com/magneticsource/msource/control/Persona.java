@@ -4,51 +4,72 @@ package com.magneticsource.msource.control;
  * Created by JeanManuel on 02/11/2015.
  */
 public class Persona {
-    private String dni;
-    private String nombres;
-    private String apellido_paterno;
-    private String apellido_materno;
+        private String Dni;
+        private String Nombres;
+        private String ApellidoPa;
+        private String ApellidoMa;
+        private String ImageUrl;
+        private String Separador = "█";
 
-    public Persona(){}
-    public Persona(String dni, String nombres, String apellido_materno, String apellido_paterno)
-    {
-        this.dni=dni;
-        this.nombres=nombres;
-        this.apellido_materno=apellido_materno;
-        this.apellido_paterno=apellido_paterno;
-    }
+        public Persona(String dni, String nombres, String apellidoPa,
+                    String apellidoMa, String imageUrl) {
+            super();
+            Dni = dni;
+            Nombres = nombres;
+            ApellidoPa = apellidoPa;
+            ApellidoMa = apellidoMa;
+            ImageUrl = imageUrl;
+        }
 
-    public String getDni() {
-        return dni;
-    }
+        public Persona(String info) {
+            super();
+            String[] informacion = info.split(Separador);
+            if (informacion.length == 9) {
+                Dni = informacion[0];
+                Nombres = informacion[1];
+                ApellidoPa = informacion[2];
+                ApellidoMa = informacion[3];
+                ImageUrl = informacion[8];
+            } else {
+                borrar();
+            }
+        }
 
-    public void setDni(String dni) {
-        this.dni = dni;
-    }
+        public Persona() {
+            super();
+            borrar();
+        }
 
-    public String getNombres() {
-        return nombres;
-    }
+        private void borrar() {
+            Dni = "";
+            Nombres = "";
+            ApellidoPa = "";
+            ApellidoMa = "";
+            ImageUrl = "";
+        }
 
-    public void setNombres(String nombres) {
-        this.nombres = nombres;
-    }
+        public String getDni() {
+            return Dni;
+        }
 
-    public String getApellido_paterno() {
-        return apellido_paterno;
-    }
+        public String getNombres() {
+            return Nombres;
+        }
 
-    public void setApellido_paterno(String apellido_paterno) {
-        this.apellido_paterno = apellido_paterno;
-    }
+        public String getApellidoPa() {
+            return ApellidoPa;
+        }
 
-    public String getApellido_materno() {
-        return apellido_materno;
-    }
+        public String getApellidoMa() {
+            return ApellidoMa;
+        }
 
-    public void setApellido_materno(String apellido_materno) {
-        this.apellido_materno = apellido_materno;
-    }
+        public String getImageUrl() {
+            return ImageUrl;
+        }
 
+        public boolean isEmpthy() {
+            return Dni.length() == 0;
+        }
 
 }
