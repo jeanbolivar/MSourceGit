@@ -5,11 +5,13 @@ import android.content.Context;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.widget.Toast;
 
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.conexion.UsuarioCliente;
 import com.magneticsource.msource.control.Persona;
+import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.ui.AlumnoActivity;
 
 /**
@@ -29,7 +31,6 @@ public class ObtenerInformacionTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        dialog.dismiss();
         dialog.setTitle(R.string.mensaje_espere);
         dialog.setMessage(context.getString(R.string.mensaje_obtener_datos));
         dialog.show();
@@ -51,8 +52,11 @@ public class ObtenerInformacionTask extends AsyncTask<String, Void, String> {
                 Toast.makeText(context, R.string.error_sesion, Toast.LENGTH_SHORT).show();
             } else {
                 Intent i =new Intent(context, AlumnoActivity.class);
+                Datos d = new Datos(context);
+                d.putString(Datos.USUARIO,s);
+                d.putString(Datos.TIPO_USUARIO,Datos.TIPO_ALUMNO);
                 context.startActivity(i);
-                Toast.makeText(context, context.getString(R.string.bienvenido) + p.getNombres(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, context.getString(R.string.bienvenido) +" "+ p.getNombres(),Toast.LENGTH_SHORT).show();
             }
 
         }

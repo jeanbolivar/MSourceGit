@@ -10,4 +10,11 @@ public class Alumno extends Persona{
                  apellidoMa,  imageURL);
     }
 
+    public static Alumno fromString(String informacion){
+        String[] inf = informacion.split(Datos.SEPARADOR1);
+        if (inf.length == 9) {
+            return new Alumno(inf[0],inf[1],inf[2],inf[3],inf[8]);
+        } else return null;
+    }
+
 }

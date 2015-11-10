@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.conexion.UsuarioCliente;
+import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.control.Validador;
 import com.magneticsource.msource.conexion.Conexion;
 
@@ -17,6 +18,11 @@ import com.magneticsource.msource.conexion.Conexion;
 public class Login {
     private Context context;
     private ProgressDialog dialog;
+
+    public static boolean SesionActiva(Context context) {
+        Datos d = new Datos(context);
+        return d.getPreferences().contains(Datos.USUARIO);
+    }
 
     private class AsyncIniciarSesion extends AsyncTask<String, Void, Boolean> {
         //private Context context;

@@ -1,6 +1,7 @@
 package com.magneticsource.msource.ui;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -22,23 +23,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        dialog = new ProgressDialog(MainActivity.this);
 
-        login =new Login(dialog);
-        Button b = (Button) findViewById(R.id.maa_btnEntrar);
-        edtDni = (EditText) findViewById(R.id.maa_edtUsuario);
-        edtClave = (EditText) findViewById(R.id.maa_edtClave);
-        b.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
-                String dni = edtDni.getText().toString();
-                String clave = edtClave.getText().toString();
-                login.iniciarSesion(dni, clave);
-            }
+            setContentView(R.layout.activity_main);
+            dialog = new ProgressDialog(MainActivity.this);
 
-        });
+            login = new Login(dialog);
+            Button b = (Button) findViewById(R.id.maa_btnEntrar);
+            edtDni = (EditText) findViewById(R.id.maa_edtUsuario);
+            edtClave = (EditText) findViewById(R.id.maa_edtClave);
+            b.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View arg0) {
+                    String dni = edtDni.getText().toString();
+                    String clave = edtClave.getText().toString();
+                    login.iniciarSesion(dni, clave);
+                }
+
+            });
 
     }
 

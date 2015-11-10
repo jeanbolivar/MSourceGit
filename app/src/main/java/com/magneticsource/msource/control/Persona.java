@@ -54,4 +54,8 @@ public class Persona {
         public String getImageURL() {
             return imageURL;
         }
+
+        public String getNombreCompleto(){
+            return getNombres() + " " + getApellidoPa()+ " " + getApellidoMa();
+        }
 }
