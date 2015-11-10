@@ -2,21 +2,21 @@ package com.magneticsource.msource.ingreso;
 
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.magneticsource.msource.R;
-import com.magneticsource.msource.conexion.UserClient;
-import com.magneticsource.msource.control.Data;
-import com.magneticsource.msource.control.Persona;
-
-import java.util.List;
+import com.magneticsource.msource.conexion.UsuarioCliente;
+import com.magneticsource.msource.control.Validador;
+import com.magneticsource.msource.conexion.Conexion;
 
 /**
  * Created by JeanManuel on 04/11/2015.
  */
 public class Login {
+    private Context context;
+    private ProgressDialog dialog;
 
     private class AsyncIniciarSesion extends AsyncTask<String, Void, Boolean> {
         //private Context context;
@@ -32,7 +32,7 @@ public class Login {
 
         @Override
         protected Boolean doInBackground(String... params) {
-            return UserClient.sesionValida(username, password);
+            return UsuarioCliente.verificarDatos(username, password);
         }
 
         @Override
@@ -43,8 +43,8 @@ public class Login {
                         .show();*/
             } else {
                 if (inicioSesion) {
-                    /*SharedPreferences.Editor editor = context.getSharedPreferences(Data.MyPREFERENCES, Context.MODE_PRIVATE).edit();
-                    editor.putString(Data.usuario, username);
+                    /*SharedPreferences.Editor editor = context.getSharedPreferences(Datos.MyPREFERENCES, Context.MODE_PRIVATE).edit();
+                    editor.putString(Datos.USUARIO, username);
                     editor.commit();
                     Toast.makeText(context,
                             R.string.bienvenido, Toast.LENGTH_LONG)
@@ -74,11 +74,41 @@ public class Login {
         }
     }
 
-    public Login(){}
-    public Persona iniciarSesion(String dni, String clave)
+    public Login(ProgressDialog dialog){
+        this.dialog =dialog;
+        this.context = dialog.getContext();
+    }
+
+    public void iniciarSesion(String dni, String clave)
     {
-        AsyncIniciarSesion s = new AsyncIniciarSesion(dni,clave);
-        return new Persona(dni, "","","","");
+        if(verificarDatos(dni,clave)){
+            Conexion  c =new Conexion(context);
+            if(c.verificarConexionInternet()){
+                IniciarSesionTask iniciar =new IniciarSesionTask(dialog, dni, clave);
+                iniciar.execute();
+            } else {
+                c.showError();
+            }
+
+        }
+    }
+
+    private boolean verificarDatos(String dni, String clave){
+        if(!Validador.validarDni(dni)){
+            Toast.makeText(context, R.string.error_dni, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        if(!Validador.validarClave(clave)){
+            Toast.makeText(context, R.string.error_clave, Toast.LENGTH_SHORT).show();
+            return false;
+        }
+
+        return true;
+    }
+
+    public void cerrarSesion(){
+
     }
 
 

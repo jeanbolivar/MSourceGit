@@ -1,5 +1,6 @@
 package com.magneticsource.msource.seguridad;
 
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -7,10 +8,12 @@ import java.util.Date;
  */
 public class Token {
 
-    private Date hora;
-    public Token(){}
+    private Time hora;
+    public Token(Time hora){
+        this.hora = hora;
+    }
 
-    public String getTosken(Date hora)
+    public String getTosken()
     {
         //algoritmo de encriptacion para crear el token de acuerdo a la hora.
         String encriptacion = "";

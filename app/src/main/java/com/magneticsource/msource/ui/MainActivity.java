@@ -1,6 +1,6 @@
 package com.magneticsource.msource.ui;
 
-import android.content.Intent;
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -10,26 +10,32 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.magneticsource.msource.R;
+import com.magneticsource.msource.ingreso.Login;
 
 public class MainActivity extends AppCompatActivity {
+
+    private Login login;
+    private ProgressDialog dialog;
+    private EditText edtDni;
+    private EditText edtClave;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button b = (Button) findViewById(R.id.button);
+        dialog = new ProgressDialog(MainActivity.this);
+
+        login =new Login(dialog);
+        Button b = (Button) findViewById(R.id.maa_btnEntrar);
+        edtDni = (EditText) findViewById(R.id.maa_edtUsuario);
+        edtClave = (EditText) findViewById(R.id.maa_edtClave);
         b.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                EditText e =(EditText) findViewById(R.id.editText);
-                Intent intent;
-                if(e.getText().length() == 1)
-                intent=   new Intent(getApplicationContext(), ProfesorActivity.class);
-                else
-                intent = new Intent(getApplicationContext(), AlumnoActivity.class);
-                startActivity(intent);
-
+                String dni = edtDni.getText().toString();
+                String clave = edtClave.getText().toString();
+                login.iniciarSesion(dni, clave);
             }
 
         });

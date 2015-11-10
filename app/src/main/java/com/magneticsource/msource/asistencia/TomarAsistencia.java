@@ -11,10 +11,12 @@ public class TomarAsistencia {
     private Profesor profesor;
     private List<String> asistentes;
 
-    public TomarAsistencia(){}
+    public TomarAsistencia(Profesor profesor){
+        this.profesor = profesor;
+    }
     public void iniciarAsistencia(){}
-    public boolean recibirAsistentes(String dni){return true;}
-    public boolean grabarAsistencia(){return true;}
+    public void recibirAsistente(String dni){}
     public void cerrarAsistencia(){}
+    public void grabarAsistencia(){}
 
 }

@@ -13,20 +13,20 @@ import org.ksoap2.transport.HttpTransportSE;
  * @author César Calle
  * 
  */
-public class WebServiceClient {
+public class ServicioWebCliente {
 	protected static String NAMESPACE = "http://services.academico.ulasalle.com";
 	protected static String HOST = "http://academico.ulasalle.edu.pe:8080/services";
 
-	protected static String getString(String Metodo, SoapObject request,
-			String URL) {
+	protected static String getString(String metodo, SoapObject peticion,
+			String url) {
 		String resTxt = null;
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
-		envelope.setOutputSoapObject(request);
-		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+		envelope.setOutputSoapObject(peticion);
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 
 		try {
-			androidHttpTransport.call(Metodo, envelope);
+			androidHttpTransport.call(metodo, envelope);
 			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 			resTxt = response.toString();
 		} catch (Exception e) {
@@ -36,16 +36,16 @@ public class WebServiceClient {
 		return resTxt;
 	}
 
-	protected static Boolean getBoolean(String Metodo, SoapObject request,
-			String URL) {
+	protected static Boolean getBoolean(String metodo, SoapObject peticion,
+			String url) {
 		Boolean resTxt = false;
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
-		envelope.setOutputSoapObject(request);
-		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+		envelope.setOutputSoapObject(peticion);
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 
 		try {
-			androidHttpTransport.call(Metodo, envelope);
+			androidHttpTransport.call(metodo, envelope);
 			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 			resTxt = Boolean.valueOf(response.toString());
 		} catch (Exception e) {
@@ -55,16 +55,16 @@ public class WebServiceClient {
 		return resTxt;
 	}
 
-	protected static Integer getInteger(String Metodo, SoapObject request,
-			String URL) {
+	protected static Integer getInteger(String metodo, SoapObject peticion,
+			String url) {
 		Integer resTxt = null;
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
-		envelope.setOutputSoapObject(request);
-		HttpTransportSE androidHttpTransport = new HttpTransportSE(URL);
+		envelope.setOutputSoapObject(peticion);
+		HttpTransportSE androidHttpTransport = new HttpTransportSE(url);
 
 		try {
-			androidHttpTransport.call(Metodo, envelope);
+			androidHttpTransport.call(metodo, envelope);
 			SoapPrimitive response = (SoapPrimitive) envelope.getResponse();
 			resTxt = Integer.valueOf(response.toString());
 		} catch (Exception e) {
@@ -76,17 +76,17 @@ public class WebServiceClient {
 
 	/**
 	 * Crea un propertyinfo
-	 * @param name nombre
-	 * @param value el dato a enviar
-	 * @param type tipo de dato
+	 * @param nombre nombre
+	 * @param valor el dato a enviar
+	 * @param tipo tipo de dato
 	 * @return propertyinfo
 	 */
-	protected static PropertyInfo createProperty(String name, Object value,
-			Object type) {
+	protected static PropertyInfo crearPropiedad(String nombre, Object valor,
+												 Object tipo) {
 		PropertyInfo p = new PropertyInfo();
-		p.setName(name);
-		p.setValue(value);
-		p.setType(type);
+		p.setName(nombre);
+		p.setValue(valor);
+		p.setType(tipo);
 		return p;
 	}
 }

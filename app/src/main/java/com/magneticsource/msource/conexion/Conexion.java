@@ -3,27 +3,30 @@ package com.magneticsource.msource.conexion;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.widget.Toast;
+
+import com.magneticsource.msource.R;
 
 public class Conexion {
 
-	private Context _context;
-	public boolean WifiConn;
-	public boolean MobileConn;
+	private Context context;
+	public boolean wifiConexion;
+	public boolean mobileConexion;
 
 	public Conexion(Context context) {
-		this._context = context;
+		this.context = context;
 	}
 
 	public boolean verificarConexionInternet() {
-		WifiConn = this.verificarWifiInternet();
-		MobileConn = this.verificarMobileInternet();
-		return WifiConn || MobileConn;
+		wifiConexion = this.verificarWifiConexion();
+		mobileConexion = this.verificarMobilConexion();
+		return wifiConexion || mobileConexion;
 	}
 
-	private boolean verificarWifiInternet() {
+	private boolean verificarWifiConexion() {
 		// Create object for ConnectivityManager class which returns network
 		// related info
-		ConnectivityManager connectivity = (ConnectivityManager) _context
+		ConnectivityManager connectivity = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		// If connectivity object is not null
 		if (connectivity != null) {
@@ -42,10 +45,10 @@ public class Conexion {
 		return false;
 	}
 
-	private boolean verificarMobileInternet() {
+	private boolean verificarMobilConexion() {
 		// Create object for ConnectivityManager class which returns network
 		// related info
-		ConnectivityManager connectivity = (ConnectivityManager) _context
+		ConnectivityManager connectivity = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		// If connectivity object is not null
 		if (connectivity != null) {
@@ -62,5 +65,9 @@ public class Conexion {
 			}
 		}
 		return false;
+	}
+
+	public void showError(){
+        Toast.makeText(context, R.string.error_internet, Toast.LENGTH_SHORT).show();
 	}
 }

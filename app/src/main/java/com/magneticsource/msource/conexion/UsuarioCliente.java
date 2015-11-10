@@ -7,24 +7,24 @@ import org.ksoap2.serialization.SoapObject;
  * @author César Calle
  *
  */
-public class UserClient extends WebServiceClient {
+public class UsuarioCliente extends ServicioWebCliente {
 	private static String URL = HOST + "/services/usuario?wsdl";
 
-	public static Boolean sesionValida(String usuario, String password) {
+	public static Boolean verificarDatos(String dni, String clave) {
 		String Metodo = "sesionValida";
 		SoapObject request = new SoapObject(NAMESPACE, Metodo);
 
-		request.addProperty(createProperty("dni", usuario, String.class));
-		request.addProperty(createProperty("password", password, String.class));
+		request.addProperty(crearPropiedad("dni", dni, String.class));
+		request.addProperty(crearPropiedad("password", clave, String.class));
 
 		return getBoolean(Metodo, request, URL);
 	}
 
-	public static String getInformacion(String usuario) {
+	public static String getInformacion(String dni) {
 		String Metodo = "getInformacion";
 		SoapObject request = new SoapObject(NAMESPACE, Metodo);
 
-		request.addProperty(createProperty("dni", usuario, String.class));
+		request.addProperty(crearPropiedad("dni", dni, String.class));
 
 		return getString(Metodo, request, URL);
 	}

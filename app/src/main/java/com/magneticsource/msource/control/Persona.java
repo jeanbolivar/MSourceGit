@@ -4,72 +4,54 @@ package com.magneticsource.msource.control;
  * Created by JeanManuel on 02/11/2015.
  */
 public class Persona {
-        private String Dni;
-        private String Nombres;
-        private String ApellidoPa;
-        private String ApellidoMa;
-        private String ImageUrl;
-        private String Separador = "█";
+        private String dni;
+        private String nombres;
+        private String apellidoPa;
+        private String apellidoMa;
+        private String imageURL;
 
         public Persona(String dni, String nombres, String apellidoPa,
-                    String apellidoMa, String imageUrl) {
+                    String apellidoMa, String imageURL) {
             super();
-            Dni = dni;
-            Nombres = nombres;
-            ApellidoPa = apellidoPa;
-            ApellidoMa = apellidoMa;
-            ImageUrl = imageUrl;
+            this.dni = dni;
+            this.nombres = nombres;
+            this.apellidoPa = apellidoPa;
+            this.apellidoMa = apellidoMa;
+            this.imageURL = imageURL;
         }
 
-        public Persona(String info) {
-            super();
-            String[] informacion = info.split(Separador);
-            if (informacion.length == 9) {
-                Dni = informacion[0];
-                Nombres = informacion[1];
-                ApellidoPa = informacion[2];
-                ApellidoMa = informacion[3];
-                ImageUrl = informacion[8];
-            } else {
-                borrar();
-            }
+        public static Persona fromString(String informacion) {
+            String[] inf = informacion.split(Datos.SEPARADOR1);
+            if (inf.length == 9) {
+                return new Persona(inf[0],inf[1],inf[2],inf[3],inf[8]);
+            } else return null;
         }
 
-        public Persona() {
-            super();
-            borrar();
-        }
-
-        private void borrar() {
-            Dni = "";
-            Nombres = "";
-            ApellidoPa = "";
-            ApellidoMa = "";
-            ImageUrl = "";
-        }
+        /*private void borrar() {
+            dni = "";
+            nombres = "";
+            apellidoPa = "";
+            apellidoMa = "";
+            imageURL = "";
+        }*/
 
         public String getDni() {
-            return Dni;
+            return dni;
         }
 
         public String getNombres() {
-            return Nombres;
+            return nombres;
         }
 
         public String getApellidoPa() {
-            return ApellidoPa;
+            return apellidoPa;
         }
 
         public String getApellidoMa() {
-            return ApellidoMa;
+            return apellidoMa;
         }
 
-        public String getImageUrl() {
-            return ImageUrl;
+        public String getImageURL() {
+            return imageURL;
         }
-
-        public boolean isEmpthy() {
-            return Dni.length() == 0;
-        }
-
 }
