@@ -24,62 +24,6 @@ public class Login {
         return d.getPreferences().contains(Datos.USUARIO);
     }
 
-    private class AsyncIniciarSesion extends AsyncTask<String, Void, Boolean> {
-        //private Context context;
-        private String password;
-        private String username;
-
-        public AsyncIniciarSesion(String user, String pass/*, Context context*/) {
-            username = user;
-            password = pass;
-            //this.context =context;
-        }
-
-
-        @Override
-        protected Boolean doInBackground(String... params) {
-            return UsuarioCliente.verificarDatos(username, password);
-        }
-
-        @Override
-        protected void onPostExecute(Boolean inicioSesion) {
-            if (inicioSesion == null) {
-                /*Toast.makeText(context,
-                        R.string.error_service, Toast.LENGTH_SHORT)
-                        .show();*/
-            } else {
-                if (inicioSesion) {
-                    /*SharedPreferences.Editor editor = context.getSharedPreferences(Datos.MyPREFERENCES, Context.MODE_PRIVATE).edit();
-                    editor.putString(Datos.USUARIO, username);
-                    editor.commit();
-                    Toast.makeText(context,
-                            R.string.bienvenido, Toast.LENGTH_LONG)
-                            .show();*/
-                } /*else
-                    Toast.makeText(context,
-                            R.string.error_sesion,
-                            Toast.LENGTH_SHORT).show();*/
-            }
-            //progress.dismiss();
-
-        }
-
-        @Override
-        protected void onPreExecute() {
-            if (username.length() <= 0) {
-                /*Toast.makeText(context, R.string.error_sesion,
-                        Toast.LENGTH_SHORT).show();*/
-                cancel(true);
-            }
-
-        }
-
-        @Override
-        protected void onCancelled() {
-            //progress.dismiss();
-        }
-    }
-
     public Login(ProgressDialog dialog){
         this.dialog =dialog;
         this.context = dialog.getContext();
@@ -93,7 +37,7 @@ public class Login {
                 IniciarSesionTask iniciar =new IniciarSesionTask(dialog, dni, clave);
                 iniciar.execute();
             } else {
-                c.showError();
+                c.mostrarError();
             }
 
         }

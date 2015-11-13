@@ -10,8 +10,8 @@ import com.magneticsource.msource.R;
 public class Conexion {
 
 	private Context context;
-	public boolean wifiConexion;
-	public boolean mobileConexion;
+	private boolean wifiConexion;
+	private boolean mobilConexion;
 
 	public Conexion(Context context) {
 		this.context = context;
@@ -19,8 +19,8 @@ public class Conexion {
 
 	public boolean verificarConexionInternet() {
 		wifiConexion = this.verificarWifiConexion();
-		mobileConexion = this.verificarMobilConexion();
-		return wifiConexion || mobileConexion;
+		mobilConexion = this.verificarMobilConexion();
+		return wifiConexion || mobilConexion;
 	}
 
 	private boolean verificarWifiConexion() {
@@ -45,7 +45,7 @@ public class Conexion {
 		return false;
 	}
 
-	private boolean verificarMobilConexion() {
+	public boolean verificarMobilConexion() {
 		// Create object for ConnectivityManager class which returns network
 		// related info
 		ConnectivityManager connectivity = (ConnectivityManager) context
@@ -67,7 +67,7 @@ public class Conexion {
 		return false;
 	}
 
-	public void showError(){
+	public void mostrarError(){
         Toast.makeText(context, R.string.error_internet, Toast.LENGTH_SHORT).show();
 	}
 }
