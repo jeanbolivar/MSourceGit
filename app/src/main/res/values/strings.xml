@@ -25,6 +25,7 @@
     <string name="mensaje_obtener_datos">Obteniendo Información</string>
 
     <string name="error_internet">No se pudo conectar a Internet</string>
+    <string name="error_adaptador_nfc">No cuenta con NFC</string>
     <string name="error_service">No se pudo conectar, intente despues</string>
     <string name="error_dni">El Usuario ingresado no es correcto</string>
     <string name="error_clave">La clave ingresada no es correcta</string>
