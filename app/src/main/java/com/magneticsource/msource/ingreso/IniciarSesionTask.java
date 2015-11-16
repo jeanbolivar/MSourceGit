@@ -38,12 +38,12 @@ public class IniciarSesionTask extends AsyncTask<String, Void, Boolean> {
     }
 
     @Override
-    protected void onPostExecute(Boolean aBoolean) {
-        super.onPostExecute(aBoolean);
-        if(aBoolean==null){
+    protected void onPostExecute(Boolean sesionValidada) {
+        super.onPostExecute(sesionValidada);
+        if(sesionValidada==null){
             dialog.dismiss();
             Toast.makeText(context, R.string.error_service, Toast.LENGTH_SHORT).show();
-        } else if(aBoolean){
+        } else if(sesionValidada){
             ObtenerInformacionTask obtenerInfo =new ObtenerInformacionTask(dialog, dni);
             obtenerInfo.execute();
         } else {

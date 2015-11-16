@@ -4,15 +4,30 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.magneticsource.msource.control.Alumno;
+import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.R;
+import com.magneticsource.msource.control.Persona;
 
 public class AlumnoActivity extends AppCompatActivity {
+
+    private TextView txvAlumno;
+    private Alumno alumno;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_alumno);
+
+        txvAlumno = (TextView) findViewById(R.id.ala_txvAlumno);
+
+        Datos d =new Datos(getApplicationContext());
+        alumno = Alumno.fromString(d.getString(Datos.USUARIO));
+
+        txvAlumno.setText(alumno.getNombreCompleto());
+
     }
 
     @Override

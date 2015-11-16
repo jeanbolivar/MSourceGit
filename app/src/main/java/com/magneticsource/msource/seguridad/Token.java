@@ -13,7 +13,7 @@ public class Token {
         this.hora = hora;
     }
 
-    public String getTosken()
+    public String getToken()
     {
         //algoritmo de encriptacion para crear el token de acuerdo a la hora.
         String encriptacion = "";
