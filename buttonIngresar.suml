@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sequencediagram><Definition> [ ButtonIngresar setOnClickListener
+	[ MainActivity getDni ]
+	[ MainActivity getClave ]
+	[ Login iniciarSesion
+		[ Login verificarDatos 
+			[Conexion verificarConexionInternet]
+			[IniciarSesionTask excecute]
+		]
+	]
+]</Definition><Links /></Sequencediagram>
