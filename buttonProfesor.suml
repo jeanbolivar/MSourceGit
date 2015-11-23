@@ -1,0 +1,3 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sequencediagram><Definition>[ ]
+[View setOnClickListener</Definition><Links><Link Id="2" Class="android.view.View" Method="setOnClickListener" Return="false"><Comment></Comment><Return Description="">void</Return><Arguments><Param Sequence="0" Name="l" Type="android.view.View.OnClickListener" Description="" /></Arguments><CallComment ShowOnDiagram="false"></CallComment></Link></Links></Sequencediagram>

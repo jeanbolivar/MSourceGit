@@ -1,11 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Sequencediagram><Definition> [ ButtonIngresar setOnClickListener
+<Sequencediagram><Definition>[ ButtonIngresar setOnClickListener
 	[ MainActivity getDni ]
 	[ MainActivity getClave ]
 	[ Login iniciarSesion
 		[ Login verificarDatos 
 			[Conexion verificarConexionInternet]
-			[IniciarSesionTask excecute]
+			[IniciarSesionTask excecute
+				[IniciarSesionTask onPreExecute]
+				[IniciarSesionTask doInBackground
+					[UsuarioCliente verificarDatos]
+				]
+				[IniciarSesionTask onPostExecute
+					[ObtenerInformacionTask execute
+						[ObtenerInformacionTask onPreExecute]
+						[ObtenerInformacionTask doInBackground
+							[UsuarioCliente getInformacion]
+						]
+						[ObtenerInformacionTask onPostExecute
+							[Persona fromString]
+							[Datos putString]
+							[Datos putString]
+							[AlumnoActivity start]
+						]
+					]
+				]
+			]			
 		]
 	]
 ]</Definition><Links /></Sequencediagram>

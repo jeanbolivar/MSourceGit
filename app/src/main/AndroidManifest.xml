@@ -14,7 +14,6 @@
             android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -33,5 +32,8 @@
     </application>
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+    <!--Service declared in manifest -->
+    <service android:name=".asistencia.ManejadorEnvioAsistencia"
+        android:exported="false"/>
 
 </manifest>
