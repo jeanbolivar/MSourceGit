@@ -1,0 +1,2 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Sequencediagram><Definition>[ProfesorActivity onCreate]</Definition><Links><Link Id="0" Class="com.magneticsource.msource.ui.ProfesorActivity" Method="onCreate" Return="false"><Comment></Comment><Return Description="">void</Return><Arguments><Param Sequence="0" Name="savedInstanceState" Type="android.os.Bundle" Description="" /></Arguments><CallComment ShowOnDiagram="false"></CallComment></Link></Links></Sequencediagram>

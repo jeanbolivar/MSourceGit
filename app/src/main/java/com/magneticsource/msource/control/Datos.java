@@ -31,4 +31,8 @@ public class Datos {
     public String getString(String clave){
         return preferences.getString(clave,null);
     }
+
+    public void removeString(String clave) {
+        preferences.edit().remove(clave).apply();
+    }
 }

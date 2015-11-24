@@ -27,14 +27,6 @@ public class Persona {
             } else return null;
         }
 
-        /*private void borrar() {
-            dni = "";
-            nombres = "";
-            apellidoPa = "";
-            apellidoMa = "";
-            imageURL = "";
-        }*/
-
         public String getDni() {
             return dni;
         }

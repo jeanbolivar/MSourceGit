@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.magneticsource.msource.R;
+import com.magneticsource.msource.conexion.Conexion;
+import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.ingreso.Login;
 
 public class MainActivity extends AppCompatActivity {
@@ -24,8 +26,23 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        Conexion c = new Conexion(getBaseContext());
+        if(!c.verificarAdaptadorNFC()){
+            finish();
+        } else {
 
             setContentView(R.layout.activity_main);
+
+            if (Login.SesionActiva(getBaseContext())) {
+                if (Login.TipoUsuario(getBaseContext()).equals(Datos.TIPO_ALUMNO)) {
+                    Intent i = new Intent(getBaseContext(), AlumnoActivity.class);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(getBaseContext(), ProfesorActivity.class);
+                    startActivity(i);
+                }
+            }
+
             dialog = new ProgressDialog(MainActivity.this);
 
             login = new Login(dialog);
@@ -42,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             });
+        }
 
     }
 

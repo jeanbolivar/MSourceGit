@@ -3,6 +3,7 @@ package com.magneticsource.msource.conexion;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.nfc.NfcAdapter;
 import android.widget.Toast;
 
 import com.magneticsource.msource.R;
@@ -65,6 +66,14 @@ public class Conexion {
 			}
 		}
 		return false;
+	}
+
+	public boolean verificarAdaptadorNFC(){
+		NfcAdapter nfcAdapter = NfcAdapter.getDefaultAdapter(context);
+        if(nfcAdapter!=null)
+            return  true;
+        Toast.makeText(context, R.string.error_adaptador_nfc, Toast.LENGTH_LONG).show();
+        return false;
 	}
 
 	public void mostrarError(){

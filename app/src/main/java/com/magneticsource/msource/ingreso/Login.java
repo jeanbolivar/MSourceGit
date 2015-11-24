@@ -24,6 +24,13 @@ public class Login {
         return d.getPreferences().contains(Datos.USUARIO);
     }
 
+    public static String TipoUsuario(Context context){
+        if(SesionActiva(context)){
+            Datos d = new Datos(context);
+            return d.getString(Datos.TIPO_USUARIO);
+        } else return null;
+    }
+
     public Login(ProgressDialog dialog){
         this.dialog =dialog;
         this.context = dialog.getContext();
@@ -58,7 +65,9 @@ public class Login {
     }
 
     public void cerrarSesion(){
-
+        Datos d =new Datos(context);
+        d.removeString(Datos.USUARIO);
+        d.removeString(Datos.TIPO_USUARIO);
     }
 
 
