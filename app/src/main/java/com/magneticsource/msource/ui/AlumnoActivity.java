@@ -1,5 +1,6 @@
 package com.magneticsource.msource.ui;
 
+import android.nfc.NfcAdapter;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -11,10 +12,22 @@ import com.magneticsource.msource.control.Datos;
 import com.magneticsource.msource.R;
 import com.magneticsource.msource.control.Persona;
 
-public class AlumnoActivity extends AppCompatActivity {
+import android.nfc.NdefMessage;
+import android.nfc.NdefRecord;
+import android.nfc.NfcAdapter.CreateNdefMessageCallback;
+import android.nfc.NfcAdapter.OnNdefPushCompleteCallback;
+import android.nfc.NfcEvent;
+import android.widget.EditText;
+import android.widget.Toast;
+
+
+public class AlumnoActivity extends AppCompatActivity implements
+        CreateNdefMessageCallback, OnNdefPushCompleteCallback{
 
     private TextView txvAlumno;
     private Alumno alumno;
+
+    EditText textOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +41,9 @@ public class AlumnoActivity extends AppCompatActivity {
 
         txvAlumno.setText(alumno.getNombreCompleto());
 
+        NfcAdapter adpater = NfcAdapter.getDefaultAdapter(this);
+        adpater.setNdefPushMessageCallback(this,this);
+        adpater.setOnNdefPushCompleteCallback(this,this);
     }
 
     @Override
@@ -50,5 +66,37 @@ public class AlumnoActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onNdefPushComplete(NfcEvent event) {
+
+        final String eventString = "onNdefPushComplete\n" + event.toString();
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                Toast.makeText(getApplicationContext(),
+                        eventString,
+                        Toast.LENGTH_LONG).show();
+            }
+        });
+
+    }
+
+    @Override
+    public NdefMessage createNdefMessage(NfcEvent event) {
+
+        String stringOut = textOut.getText().toString();
+        byte[] bytesOut = stringOut.getBytes();
+
+        NdefRecord ndefRecordOut = new NdefRecord(
+                NdefRecord.TNF_MIME_MEDIA,
+                "text/plain".getBytes(),
+                new byte[] {},
+                bytesOut);
+
+        NdefMessage ndefMessageout = new NdefMessage(ndefRecordOut);
+        return ndefMessageout;
     }
 }
